@@ -1281,50 +1281,50 @@ public class AllJoynService extends Service implements Observer {
         mChatApplication.newRemoteUserMessage(nickname, string);
     }
     
-//    @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Contact")
-//    public void Contact(String name, String email) {
-//    	
-//        /*
-//    	 * See the long comment in doJoinSession() for more explanation of
-//    	 * why this is needed.
-//    	 * 
-//    	 * The only time we allow a signal from the hosted session ID to pass
-//    	 * through is if we are in mJoinedToSelf state.  If the source of the
-//    	 * signal is us, we also filter out the signal since we are going to
-//    	 * locally echo the signal.
-//
-//     	 */
-//    	String uniqueName = mBus.getUniqueName();
-//    	MessageContext ctx = mBus.getMessageContext();
-//        Log.i(TAG, "Chat(): use sessionId is " + mUseSessionId);
-//        Log.i(TAG, "Chat(): message sessionId is " + ctx.sessionId);
-//        
-//        /*
-//         */
-//        if (ctx.sender.equals(uniqueName)) {
-//            Log.i(TAG, "Chat(): dropped our own signal received on session " + ctx.sessionId);
-//    		return;
-//    	}
-//
-//        /*
-//         * Drop signals on the hosted session unless we are joined-to-self.
-//         */
-//        if (mJoinedToSelf == false && ctx.sessionId == mHostSessionId) {
-//            Log.i(TAG, "Chat(): dropped signal received on hosted session " + ctx.sessionId + " when not joined-to-self");
-//    		return;
-//    	}
-//    	
-//        /*
-//         * To keep the application simple, we didn't force users to choose a
-//         * nickname.  We want to identify the message source somehow, so we
-//         * just use the unique name of the sender's bus attachment.
-//         */
-//        String nickname = ctx.sender;
-//        nickname = nickname.substring(nickname.length()-10, nickname.length());
-//        
-//        Log.i(TAG, "Chat(): signal " + string + " received from nickname " + nickname);
-//        mChatApplication.newRemoteUserMessage(nickname, string);
-//    }
+    @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Contact")
+    public void Contact(String name, String email) {
+    	
+        /*
+    	 * See the long comment in doJoinSession() for more explanation of
+    	 * why this is needed.
+    	 * 
+    	 * The only time we allow a signal from the hosted session ID to pass
+    	 * through is if we are in mJoinedToSelf state.  If the source of the
+    	 * signal is us, we also filter out the signal since we are going to
+    	 * locally echo the signal.
+
+     	 */
+    	String uniqueName = mBus.getUniqueName();
+    	MessageContext ctx = mBus.getMessageContext();
+        Log.i(TAG, "Contact(): use sessionId is " + mUseSessionId);
+        Log.i(TAG, "Contact(): message sessionId is " + ctx.sessionId);
+        
+        /*
+         */
+        if (ctx.sender.equals(uniqueName)) {
+            Log.i(TAG, "Contact(): dropped our own signal received on session " + ctx.sessionId);
+    		return;
+    	}
+
+        /*
+         * Drop signals on the hosted session unless we are joined-to-self.
+         */
+        if (mJoinedToSelf == false && ctx.sessionId == mHostSessionId) {
+            Log.i(TAG, "Contact(): dropped signal received on hosted session " + ctx.sessionId + " when not joined-to-self");
+    		return;
+    	}
+    	
+        /*
+         * To keep the application simple, we didn't force users to choose a
+         * nickname.  We want to identify the message source somehow, so we
+         * just use the unique name of the sender's bus attachment.
+         */
+        String nickname = ctx.sender;
+        nickname = nickname.substring(nickname.length()-10, nickname.length());
+        
+        Log.i(TAG, "Contact() " + name + ", " + email);
+        mChatApplication.newRemoteUserMessage(nickname, name + ", " + email);
+    }
     
     /*
      * Load the native alljoyn_java library.  The actual AllJoyn code is
