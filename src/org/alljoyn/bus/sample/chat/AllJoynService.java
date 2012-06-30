@@ -40,6 +40,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -48,6 +49,7 @@ import android.content.Intent;
 
 import android.util.Log;
 
+@SuppressLint("NewApi")
 public class AllJoynService extends Service implements Observer {
 	private static final String TAG = "chat.AllJoynService";
 
