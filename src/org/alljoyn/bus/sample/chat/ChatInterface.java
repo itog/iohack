@@ -33,4 +33,8 @@ public interface ChatInterface {
      */
     @BusSignal
     public void Chat(String str) throws BusException;
+    
+    @BusSignal
+    public void Contact(String name, String email) throws BusException;
+    
 }
