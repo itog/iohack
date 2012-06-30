@@ -53,19 +53,6 @@ public class UseActivity extends Activity implements Observer {
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
-        
-        EditText messageBox = (EditText)findViewById(R.id.useMessage);
-        messageBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-                	String message = view.getText().toString();
-                    Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
-    	            mChatApplication.newLocalUserMessage(message);
-    	            view.setText("");
-                }
-                return true;
-            }
-        });
                 
         mJoinButton = (Button)findViewById(R.id.useJoin);
         mJoinButton.setOnClickListener(new View.OnClickListener() {
