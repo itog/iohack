@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TextView android:id="@+id/title"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:textAppearance="?android:attr/textAppearanceLarge"
+    	android:layout_centerHorizontal="true"
+    	android:gravity="center"
+    	android:text="Get A Room Setup"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginTop="5dip"
+    	/>
+    
+	<LinearLayout android:id="@+id/email_grp"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/title"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginLeft="5dip"
+    	android:layout_marginRight="5dip">
+	    <TextView 
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:textAppearance="?android:attr/textAppearanceSmall"
+	    	android:text="Email"
+	    	/> <!-- replace text label with icon -->
+	    <EditText android:id="@+id/st_email"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2.5"
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+	    	android:hint="Email"
+	    	/>
+	    <Button android:id="@+id/st_email_btn"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:onClick="importBtn"
+	    	android:text=" i "
+	    	android:textAppearance="?android:attr/textAppearanceLarge"
+	        />
+	</LinearLayout>
+	
+	
+	<LinearLayout android:id="@+id/phone_grp"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/email_grp"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginLeft="5dip"
+    	android:layout_marginRight="5dip">
+	    <TextView 
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:textAppearance="?android:attr/textAppearanceSmall"
+	    	android:text="Phone"
+	    	/> <!-- replace text label with icon -->
+	    <EditText android:id="@+id/st_phone"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2.5"
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+	    	android:hint="Phone"
+	    	/>
+	    <Button android:id="@+id/st_phone_btn"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:onClick="importBtn"
+	    	android:text=" i "
+	    	android:textAppearance="?android:attr/textAppearanceLarge"
+	        />
+	</LinearLayout>
+	
+	<LinearLayout android:id="@+id/plus_grp"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/phone_grp"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginLeft="5dip"
+    	android:layout_marginRight="5dip">
+	    <TextView 
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:textAppearance="?android:attr/textAppearanceSmall"
+	    	android:text="Google+"
+	    	/> <!-- replace text label with icon -->
+	    <EditText android:id="@+id/st_plus"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2.5"
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+	    	android:hint="Google+ Account"
+	    	/>
+	    <Button android:id="@+id/st_plus_btn"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:onClick="importBtn"
+	    	android:text=" i "
+	    	android:textAppearance="?android:attr/textAppearanceLarge"
+	        />
+	</LinearLayout>
+	
+	<LinearLayout android:id="@+id/tweet_grp"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/plus_grp"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginLeft="5dip"
+    	android:layout_marginRight="5dip">
+	    <TextView 
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:textAppearance="?android:attr/textAppearanceSmall"
+	    	android:text="Twitter"
+	    	/> <!-- replace text label with icon -->
+	    <EditText android:id="@+id/st_twitter"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2.5"
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+	    	android:hint="Twitter Handle"
+	    	/>
+	    <Button android:id="@+id/st_twitter_btn"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:onClick="importBtn"
+	    	android:text=" i "
+	    	android:textAppearance="?android:attr/textAppearanceLarge"
+	    	android:layout_margin="5dip"
+	        />
+	</LinearLayout>
+	
+	<LinearLayout android:id="@+id/facebook_grp"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/tweet_grp"
+    	android:layout_marginBottom="10dip"
+    	android:layout_marginLeft="5dip"
+    	android:layout_marginRight="5dip">
+	    <TextView 
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:textAppearance="?android:attr/textAppearanceSmall"
+	    	android:text="Facebook"
+	    	/> <!-- replace text label with icon -->
+	    <EditText android:id="@+id/st_facebook"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="2.5"
+	    	android:textAppearance="?android:attr/textAppearanceMedium"
+	    	android:hint="Facebook"
+	    	/>
+	    <Button android:id="@+id/st_facebook_btn"
+	        android:layout_width="0dip"
+	    	android:layout_height="wrap_content"
+	    	android:layout_weight="1"
+	    	android:onClick="importBtn"
+	    	android:text=" i "
+	    	android:textAppearance="?android:attr/textAppearanceLarge"
+	    	android:layout_margin="5dip"
+	        />
+	</LinearLayout>
+</RelativeLayout>
+</ScrollView>
