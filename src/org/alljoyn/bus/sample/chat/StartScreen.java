@@ -17,9 +17,9 @@ import android.telephony.TelephonyManager;
 public class StartScreen extends Activity {
 
 	private static final String TAG = "StartScreen";
-	private static final String EMAIL_KEY = "EMAIL_KEY";
-	private static final String NAME_KEY = "NAME_KEY";
-	private static final String PHONE_KEY = "PHONE_KEY";
+	static final String EMAIL_KEY = "EMAIL_KEY";
+	static final String NAME_KEY = "NAME_KEY";
+	static final String PHONE_KEY = "PHONE_KEY";
 	private SharedPreferences prefs;
 	private TextView phoneNum;
 	private TextView email;
