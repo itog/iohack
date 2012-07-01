@@ -1110,13 +1110,16 @@ public class AllJoynService extends Service implements Observer {
 
 			@Override
 			public void sessionMemberAdded(int sessionId, String uniqueName) {
+				//get contact information of mine
+				String name = "anonymous";
+				String email = "anonymous@foo.bar.com";
 				try {
 					if (mJoinedToSelf) {
 						if (mHostChatInterface != null) {
-							mHostChatInterface.Chat("hello all");
+							mHostChatInterface.Contact(name, email);
 						}
 					} else {
-						mChatInterface.Chat("hello all");
+						mChatInterface.Contact(name, email);
 					}
 				} catch (BusException ex) {
 		    		mChatApplication.alljoynError(ChatApplication.Module.USE, "Bus exception while sending message: (" + ex + ")");
