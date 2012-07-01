@@ -69,12 +69,12 @@ public class UseActivity extends Activity implements Observer {
 //        	}
 //        });
 
-//        mLeaveButton = (Button)findViewById(R.id.useLeave);
-//        mLeaveButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                showDialog(DIALOG_LEAVE_ID);
-//            }
-//        });
+        mLeaveButton = (Button)findViewById(R.id.useLeave);
+        mLeaveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(DIALOG_LEAVE_ID);
+            }
+        });
         
         mChannelName = (TextView)findViewById(R.id.useChannelName);
         mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
@@ -188,12 +188,12 @@ public class UseActivity extends Activity implements Observer {
         case IDLE:
             mChannelStatus.setText("Idle");
 //            mJoinButton.setEnabled(true);
-//            mLeaveButton.setEnabled(false);
+            mLeaveButton.setEnabled(false);
             break;
         case JOINED:
             mChannelStatus.setText("Joined");
 //            mJoinButton.setEnabled(false);
-//            mLeaveButton.setEnabled(true);
+            mLeaveButton.setEnabled(true);
             break;	
         }
     }
@@ -252,7 +252,7 @@ public class UseActivity extends Activity implements Observer {
     private ArrayAdapter<String> mHistoryList;
     
 //    private Button mJoinButton;
-//    private Button mLeaveButton;
+    private Button mLeaveButton;
     
     private TextView mChannelName;
       

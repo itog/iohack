@@ -31,21 +31,21 @@
             />
         </TableRow>
     </TableLayout>
-	<!-- 
+
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
-        
+<!-- 
         <Button
             android:id="@+id/useJoin"        
             android:layout_width="120dp"
             android:layout_height="wrap_content"
     	    android:text="Join Channel"
         />
-        
+ -->        
         <Button
             android:id="@+id/useLeave"
             android:layout_width="120dp"
@@ -53,7 +53,6 @@
     	    android:text="Leave Channel"
         />
     </LinearLayout>
-   -->
        
     <ListView 
         android:id="@+id/useHistoryList"           
