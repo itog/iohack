@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UseActivity extends Activity implements Observer {
@@ -52,9 +54,11 @@ public class UseActivity extends Activity implements Observer {
         Log.i(TAG, "onCreate()");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.use);
+        
+        //String str = getIntent().getExtras().getString("name");
                 
         //mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-        mHistoryList = new SampleAdapter(this, R.layout.list_item, null);
+        mHistoryList = new SampleAdapter(this);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
                 
@@ -97,7 +101,6 @@ public class UseActivity extends Activity implements Observer {
          * from other components.
          */
         mChatApplication.addObserver(this);
-
     }
     
 	public void onDestroy() {
@@ -184,13 +187,13 @@ public class UseActivity extends Activity implements Observer {
         switch (channelState) {
         case IDLE:
             mChannelStatus.setText("Idle");
-            mJoinButton.setEnabled(true);
-            mLeaveButton.setEnabled(false);
+//            mJoinButton.setEnabled(true);
+//            mLeaveButton.setEnabled(false);
             break;
         case JOINED:
             mChannelStatus.setText("Joined");
-            mJoinButton.setEnabled(false);
-            mLeaveButton.setEnabled(true);
+//            mJoinButton.setEnabled(false);
+//            mLeaveButton.setEnabled(true);
             break;	
         }
     }
@@ -248,41 +251,64 @@ public class UseActivity extends Activity implements Observer {
     
     private ArrayAdapter<String> mHistoryList;
     
-    private Button mJoinButton;
-    private Button mLeaveButton;
+//    private Button mJoinButton;
+//    private Button mLeaveButton;
     
     private TextView mChannelName;
       
     private TextView mChannelStatus;
     
     
-    public class SampleAdapter extends ArrayAdapter<String> {
-
-        private Context _context;
-        private int _resId;
-        private List<String> _items;
+    @SuppressLint({ "ParserError", "ParserError", "ParserError" })
+	public class SampleAdapter extends ArrayAdapter<String> {
+    	static final int resid = R.layout.list_item;
+//        private Context _context;
+//        private int _resId;
+//        private List<String> _items;
         private LayoutInflater _inflater;
 
-        public SampleAdapter(Context context, int resId, List<String> items) {
-            super(context, resId, items);
-
-            _context = context;
-            _resId = resId;
-            _items = items;
-
-            _inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        public SampleAdapter(Context context){  
+            super(context, resid);
+            
+            _inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+//        public SampleAdapter(Context context, int resId, List<String> items) {
+//            super(context, resId, items);
+//
+//            _context = context;
+//            _resId = resId;
+//            _items = items;
+//            if  (items != null) {
+//            	
+//            } else {
+//            	_items = new ArrayList<String>();
+//            }
+//
+//        _inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        }
 
-        @Override
+//        @Override
+//		public int getCount() {
+//        	if (_items != null) {
+//        		return _items.size();
+//        	} else {
+//        		return 0;
+//        	}
+//			
+//		}
+
+		@Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view;
             if (convertView != null) {
                 view = convertView;
             } else {
-                view = _inflater.inflate(_resId, null);
+                view = _inflater.inflate(resid, null);
             }
 
-            String item = _items.get(position);
+            
+            //String item = _items.get(position);
+            String item = this.getItem(position);
 
 //            ((TextView) view.findViewById(R.id.title)).setText(item.getTitle());
 //            ((TextView) view.findViewById(R.id.isbn)).setText(item.getIsbn());

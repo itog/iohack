@@ -16,31 +16,21 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.DialogBuilder;
-
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.Dialog;
-
-import android.view.KeyEvent;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import android.util.Log;
-
-import java.util.List;
 
 public class ViewChannelActivity extends Activity implements Observer {
     private static final String TAG = "chat.UseActivity";
@@ -49,15 +39,15 @@ public class ViewChannelActivity extends Activity implements Observer {
         Log.i(TAG, "onCreate()");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.viewchannel);
+        
+        final Activity self = this;
 
         mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
 
         mChannelName = (TextView)findViewById(R.id.useChannelName);
-        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
-        
-        
+        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);        
 
         /*
          * Keep a pointer to the Android Appliation class around.  We use this
@@ -71,6 +61,18 @@ public class ViewChannelActivity extends Activity implements Observer {
         ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
     	final ListView channelList = (ListView)findViewById(R.id.useJoinChannelList);
         channelList.setAdapter(channelListAdapter);
+        channelList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
+				String str = ((TextView)v).getText().toString();
+				mChatApplication.useSetChannelName(str);
+				mChatApplication.useJoinChannel();
+				
+				Intent i = new Intent(self, UseActivity.class);
+				//i.putExtra("name", ((TextView)v).getText());
+				self.startActivity(i);
+			}
+        });
         
 	    List<String> channels = mChatApplication.getFoundChannels();
         for (String channel : channels) {
