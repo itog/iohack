@@ -28,9 +28,11 @@ import android.provider.ContactsContract;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentProviderOperation;
 import android.content.Context;
+import android.content.DialogInterface;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -78,15 +80,27 @@ public class UseActivity extends Activity implements Observer {
 				Log.i("my tag", email);
 				Log.i("my tag", name);
 				Log.i("my tag", phone);
+				
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				            break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            break;
+				        }
+				    }
+				};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(UseActivity.this);
+				builder.setMessage("Add "+ name + " to contacts?").setPositiveButton("Yes", dialogClickListener)
+				    .setNegativeButton("No", dialogClickListener).show();
+				
 			}
 		});
                 
-//        mJoinButton = (Button)findViewById(R.id.useJoin);
-//        mJoinButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                showDialog(DIALOG_JOIN_ID);
-//        	}
-//        });
 
         mLeaveButton = (Button)findViewById(R.id.useLeave);
         mLeaveButton.setOnClickListener(new View.OnClickListener() {
