@@ -27,9 +27,12 @@ import android.os.Bundle;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import android.widget.ArrayAdapter;
@@ -50,23 +53,24 @@ public class UseActivity extends Activity implements Observer {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.use);
                 
-        mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+        //mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+        mHistoryList = new SampleAdapter(this, R.layout.list_item, null);
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
                 
-        mJoinButton = (Button)findViewById(R.id.useJoin);
-        mJoinButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_JOIN_ID);
-        	}
-        });
+//        mJoinButton = (Button)findViewById(R.id.useJoin);
+//        mJoinButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                showDialog(DIALOG_JOIN_ID);
+//        	}
+//        });
 
-        mLeaveButton = (Button)findViewById(R.id.useLeave);
-        mLeaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_LEAVE_ID);
-            }
-        });
+//        mLeaveButton = (Button)findViewById(R.id.useLeave);
+//        mLeaveButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                showDialog(DIALOG_LEAVE_ID);
+//            }
+//        });
         
         mChannelName = (TextView)findViewById(R.id.useChannelName);
         mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
@@ -250,4 +254,41 @@ public class UseActivity extends Activity implements Observer {
     private TextView mChannelName;
       
     private TextView mChannelStatus;
+    
+    
+    public class SampleAdapter extends ArrayAdapter<String> {
+
+        private Context _context;
+        private int _resId;
+        private List<String> _items;
+        private LayoutInflater _inflater;
+
+        public SampleAdapter(Context context, int resId, List<String> items) {
+            super(context, resId, items);
+
+            _context = context;
+            _resId = resId;
+            _items = items;
+
+            _inflater = (LayoutInflater) _context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view;
+            if (convertView != null) {
+                view = convertView;
+            } else {
+                view = _inflater.inflate(_resId, null);
+            }
+
+            String item = _items.get(position);
+
+//            ((TextView) view.findViewById(R.id.title)).setText(item.getTitle());
+//            ((TextView) view.findViewById(R.id.isbn)).setText(item.getIsbn());
+            ((TextView) view.findViewById(R.id.textName)).setText(item);
+
+            return view;
+        }
+    }
 }
