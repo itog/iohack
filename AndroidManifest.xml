@@ -5,10 +5,9 @@
     android:versionName="1.0" >
 
     <!-- Permission required to use the TCP transport -->
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_MULTICAST_STATE"></uses-permission>
     <!-- Permission required to use the Bluetooth transport -->
     <uses-permission android:name="android.permission.BLUETOOTH" >
     </uses-permission>
@@ -52,11 +51,6 @@
             android:name=".ViewChannelActivity"
             android:label="AllJoyn Chat View Channel"
             android:windowSoftInputMode="adjustResize" >
-        </activity>
-        <activity
-            android:name=".ViewChannelActivity"
-            android:label="AllJoyn Chat View Channel"
-            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,10 +62,13 @@
             android:label="AllJoyn Chat Channel Usage"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-
-        <service android:name="AllJoynService" >
-        </service>
-service>
+        
+        <service
+            android:name="AllJoynService">
+        </service>service>
+        
+        <service android:name="org.alljoyn.bus.alljoyn.BundleDaemonService">
+		</service>
     </application>
 
 </manifest>
