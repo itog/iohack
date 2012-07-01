@@ -103,7 +103,7 @@ public class ViewChannelActivity extends Activity implements Observer {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, MENU_REFRESH, Menu.NONE, "Refresh");
-		menu.add(Menu.NONE, MENU_ADDCHANNEL, Menu.NONE, "Add Ch.");
+		menu.add(Menu.NONE, MENU_ADDCHANNEL, Menu.NONE, "Host Ch.");
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -124,7 +124,7 @@ public class ViewChannelActivity extends Activity implements Observer {
 
 	private void refreshChannelList() {
 		ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(
-				this, android.R.layout.test_list_item);
+				this, android.R.layout.simple_list_item_1);
 		final ListView channelList = (ListView) findViewById(R.id.useJoinChannelList);
 		channelList.setAdapter(channelListAdapter);
 
