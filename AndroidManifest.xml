@@ -2,56 +2,76 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.alljoyn.bus.sample.chat"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0" >
+
     <!-- Permission required to use the TCP transport -->
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" >
+    </uses-permission>
     <!-- Permission required to use the Bluetooth transport -->
-    <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>    
+    <uses-permission android:name="android.permission.BLUETOOTH" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" >
+    </uses-permission>
 
     <supports-screens
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:smallScreens="false"
-        android:anyDensity="true" />
-    
-    <application
-        android:icon="@drawable/icon"
-        android:label="@string/app_name"
-        android:name=".ChatApplication">
+        android:normalScreens="true"
+        android:smallScreens="false" />
 
+    <application
+        android:name=".ChatApplication"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
         <activity
             android:name=".StartScreen"
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
+        <activity
+            android:name=".TabWidget"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
 
-        <activity 
-            android:name=".TabWidget" 
-            android:windowSoftInputMode="adjustResize"
-            android:label="@string/app_name">
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".HostActivity"
+            android:label="AllJoyn Chat Channel Hosting"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name=".ViewChannelActivity"
+            android:label="AllJoyn Chat View Channel"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name=".ViewChannelActivity"
+            android:label="AllJoyn Chat View Channel"
+            android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity 
-            android:name=".HostActivity" 
-            android:windowSoftInputMode="adjustResize"
-            android:label="AllJoyn Chat Channel Hosting">
+        <activity
+            android:name=".UseActivity"
+            android:label="AllJoyn Chat Channel Usage"
+            android:windowSoftInputMode="adjustResize" >
         </activity>
 
-        <activity 
-            android:name=".UseActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:label="AllJoyn Chat Channel Usage">
-        </activity>
-        
-        <service
-            android:name="AllJoynService">
-        </service>service>
-        
+        <service android:name="AllJoynService" >
+        </service>
+service>
     </application>
-</manifest> 
+
+</manifest>
