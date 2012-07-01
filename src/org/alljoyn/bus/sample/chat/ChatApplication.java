@@ -16,26 +16,15 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.AllJoynService;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.AllJoynService.UseChannelState;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import android.app.Application;
-
 import android.content.ComponentName;
 import android.content.Intent;
-
 import android.util.Log;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import java.util.Date;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * The ChatAppliation class serves as the Model (in the sense of the common
@@ -466,19 +455,6 @@ public class ChatApplication extends Application implements Observable {
 	 */
 	public static final String HOST_STOP_CHANNEL_EVENT = "HOST_STOP_CHANNEL_EVENT";
 	
-	/**
-	 * Whenever our local user types a message, we need to send it out on the
-	 * channel, which we do by calling addOutboundItem.  This will eventually
-	 * result in an AllJoyn Bus Signal being sent to the other participants on
-	 * the channel.  Since the sessions that implement the channel don't "echo"
-	 * back to the source, we need to echo the message into our history.
-	 */
-	public synchronized void newLocalUserMessage(String message) {
-		addInboundItem("Me", message);
-		if (useGetChannelState() == AllJoynService.UseChannelState.JOINED) {
-			addOutboundItem(message);
-		}
-	}
 	
 	/**
 	 * Whenever a user types a message into the channel, we expect the AllJoyn 
@@ -489,8 +465,8 @@ public class ChatApplication extends Application implements Observable {
 	 * unique ID of the sending bus attachment.  This is not very user friendly,
 	 * but is convenient and guaranteed to be unique.
 	 */
-	public synchronized void newRemoteUserMessage(String nickname, String message) {
-		addInboundItem(nickname, message);
+	public synchronized void newRemoteUserMessage(String name, String email, String phone) {
+		addInboundItem(name, email, phone);
 	}
 
 	final int OUTBOUND_MAX = 5;
@@ -553,8 +529,8 @@ public class ChatApplication extends Application implements Observable {
 	 * The user interface part of the application is then expected to wake up
 	 * and syncrhonize itself to the new history.
 	 */
-	private void addInboundItem(String nickname, String message) {
-		addHistoryItem(nickname, message);
+	private void addInboundItem(String name, String email, String phone) {
+		addHistoryItem(name, email, phone);
 	}
 	
 	/**
@@ -569,6 +545,8 @@ public class ChatApplication extends Application implements Observable {
 	 */
 	private List<String> mHistory = new ArrayList<String>();
 	
+	public HashMap<String, ArrayList<String>> nameMap = new HashMap<String, ArrayList<String>>();
+	
 	/**
 	 * Whenever a user in the channel types a message, it needs to result in
 	 * the history being updated with the nickname of the user originating the
@@ -579,11 +557,12 @@ public class ChatApplication extends Application implements Observable {
 	 * change notification to all observers indicating that the history has
 	 * changed when we modify it.
 	 */
-	private void addHistoryItem(String nickname, String message) {
-		if (mHistory.size() == HISTORY_MAX) {
-			mHistory.remove(0);
-		}
-		mHistory.add(message);
+	private void addHistoryItem(String name, String email, String phone) {
+		mHistory.add(name);
+		ArrayList<String> contactList = new ArrayList<String>();
+		contactList.add(email);
+		contactList.add(phone);
+		nameMap.put(name, contactList);
 		notifyObservers(HISTORY_CHANGED_EVENT);
 	}
 	

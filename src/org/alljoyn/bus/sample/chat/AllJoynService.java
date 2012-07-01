@@ -46,6 +46,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import android.util.Log;
 
@@ -1121,17 +1122,19 @@ public class AllJoynService extends Service implements Observer {
 
         SignalEmitter emitter = new SignalEmitter(mChatService, mUseSessionId, SignalEmitter.GlobalBroadcast.Off);
         mChatInterface = emitter.getInterface(ChatInterface.class);
-
+        
+        prefs = getSharedPreferences(StartScreen.PREFS_NAME, 0);
+        String email = prefs.getString(StartScreen.EMAIL_KEY, null);
+        String name = prefs.getString(StartScreen.NAME_KEY, null);
+        String phone = prefs.getString(StartScreen.PHONE_KEY, null);
         //TODO get contact information of mine
-		String name = "anonymous";
-		String email = "anonymous@foo.bar.com";
 		try {
 			if (mJoinedToSelf) {
 				if (mHostChatInterface != null) {
-					mHostChatInterface.Contact(name, email);
+					mHostChatInterface.Contact(name, email, phone);
 				}
 			} else {
-				mChatInterface.Contact(name, email);
+				mChatInterface.Contact(name, email, phone);
 			}
 		} catch (BusException ex) {
     		mChatApplication.alljoynError(ChatApplication.Module.USE, "Bus exception while sending message: (" + ex + ")");
@@ -1145,6 +1148,8 @@ public class AllJoynService extends Service implements Observer {
      * This is the interface over which the chat messages will be sent.
      */
     ChatInterface mChatInterface = null;
+    
+    private SharedPreferences prefs;
 
     /**
      * Implementation of the functionality related to joining an existing
@@ -1215,7 +1220,7 @@ public class AllJoynService extends Service implements Observer {
     	public void Chat(String str) throws BusException {
         }
 
-		public void Contact(String name, String email) throws BusException {
+		public void Contact(String name, String email, String phone) throws BusException {
 
 		}
     }
@@ -1226,63 +1231,8 @@ public class AllJoynService extends Service implements Observer {
      */
     private ChatService mChatService = new ChatService();
 
-    /**
-     * The signal handler for messages received from the AllJoyn bus.
-     *
-     * Since the messages sent on a chat channel will be sent using a bus
-     * signal, we need to provide a signal handler to receive those signals.
-     * This is it.  Note that the name of the signal handler has the first
-     * letter capitalized to conform with the DBus convention for signal
-     * handler names.
-     */
-    @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Chat")
-    public void Chat(String string) {
-
-        /*
-    	 * See the long comment in doJoinSession() for more explanation of
-    	 * why this is needed.
-    	 *
-    	 * The only time we allow a signal from the hosted session ID to pass
-    	 * through is if we are in mJoinedToSelf state.  If the source of the
-    	 * signal is us, we also filter out the signal since we are going to
-    	 * locally echo the signal.
-
-     	 */
-    	String uniqueName = mBus.getUniqueName();
-    	MessageContext ctx = mBus.getMessageContext();
-        Log.i(TAG, "Chat(): use sessionId is " + mUseSessionId);
-        Log.i(TAG, "Chat(): message sessionId is " + ctx.sessionId);
-
-        /*
-         * Always drop our own signals which may be echoed back from the system.
-         */
-        if (ctx.sender.equals(uniqueName)) {
-            Log.i(TAG, "Chat(): dropped our own signal received on session " + ctx.sessionId);
-    		return;
-    	}
-
-        /*
-         * Drop signals on the hosted session unless we are joined-to-self.
-         */
-        if (mJoinedToSelf == false && ctx.sessionId == mHostSessionId) {
-            Log.i(TAG, "Chat(): dropped signal received on hosted session " + ctx.sessionId + " when not joined-to-self");
-    		return;
-    	}
-
-        /*
-         * To keep the application simple, we didn't force users to choose a
-         * nickname.  We want to identify the message source somehow, so we
-         * just use the unique name of the sender's bus attachment.
-         */
-        String nickname = ctx.sender;
-        nickname = nickname.substring(nickname.length()-10, nickname.length());
-
-        Log.i(TAG, "Chat(): signal " + string + " received from nickname " + nickname);
-        mChatApplication.newRemoteUserMessage(nickname, string);
-    }
-
     @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Contact")
-    public void Contact(String name, String email) {
+    public void Contact(String name, String email, String phone) {
 
         /*
     	 * See the long comment in doJoinSession() for more explanation of
@@ -1299,20 +1249,8 @@ public class AllJoynService extends Service implements Observer {
         Log.i(TAG, "Contact(): use sessionId is " + mUseSessionId);
         Log.i(TAG, "Contact(): message sessionId is " + ctx.sessionId);
 
-        /*
-         */
-        if (ctx.sender.equals(uniqueName)) {
-            Log.i(TAG, "Contact(): dropped our own signal received on session " + ctx.sessionId);
-    		return;
-    	}
 
-        /*
-         * Drop signals on the hosted session unless we are joined-to-self.
-         */
-        if (mJoinedToSelf == false && ctx.sessionId == mHostSessionId) {
-            Log.i(TAG, "Contact(): dropped signal received on hosted session " + ctx.sessionId + " when not joined-to-self");
-    		return;
-    	}
+
 
         /*
          * To keep the application simple, we didn't force users to choose a
@@ -1323,7 +1261,7 @@ public class AllJoynService extends Service implements Observer {
         nickname = nickname.substring(nickname.length()-10, nickname.length());
 
         Log.i(TAG, "Contact() " + name + ", " + email);
-        mChatApplication.newRemoteUserMessage(nickname, name + ", " + email);
+        mChatApplication.newRemoteUserMessage(name, email, phone);
     }
 
     /*
