@@ -54,37 +54,10 @@ public class ViewChannelActivity extends Activity implements Observer {
         ListView hlv = (ListView) findViewById(R.id.useHistoryList);
         hlv.setAdapter(mHistoryList);
 
-        EditText messageBox = (EditText)findViewById(R.id.useMessage);
-        messageBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_UP) {
-                	String message = view.getText().toString();
-                    Log.i(TAG, "useMessage.onEditorAction(): got message " + message + ")");
-    	            mChatApplication.newLocalUserMessage(message);
-    	            view.setText("");
-                }
-                return true;
-            }
-        });
-
-        /*
-        mJoinButton = (Button)findViewById(R.id.useJoin);
-        mJoinButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-        	}
-        });
-
-        mLeaveButton = (Button)findViewById(R.id.useLeave);
-        mLeaveButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DIALOG_LEAVE_ID);
-            }
-        });
-        */
-
         mChannelName = (TextView)findViewById(R.id.useChannelName);
         mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
+        
+        
 
         /*
          * Keep a pointer to the Android Appliation class around.  We use this
@@ -94,6 +67,20 @@ public class ViewChannelActivity extends Activity implements Observer {
          */
         mChatApplication = (ChatApplication)getApplication();
         mChatApplication.checkin();
+        
+        ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+    	final ListView channelList = (ListView)findViewById(R.id.useJoinChannelList);
+        channelList.setAdapter(channelListAdapter);
+        
+	    List<String> channels = mChatApplication.getFoundChannels();
+        for (String channel : channels) {
+        	int lastDot = channel.lastIndexOf('.');
+        	if (lastDot < 0) {
+        		continue;
+        	}
+            channelListAdapter.add(channel.substring(lastDot + 1));
+        }
+	    channelListAdapter.notifyDataSetChanged();
 
         /*
          * Call down into the model to get its current state.  Since the model
@@ -108,8 +95,6 @@ public class ViewChannelActivity extends Activity implements Observer {
          * from other components.
          */
         mChatApplication.addObserver(this);
-
-        showDialog(DIALOG_JOIN_ID);
 
     }
 
