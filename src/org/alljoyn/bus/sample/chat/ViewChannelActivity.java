@@ -16,36 +16,23 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.DialogBuilder;
-
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
+import java.util.List;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-
-import android.view.KeyEvent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import android.util.Log;
-
-import java.util.List;
-
 public class ViewChannelActivity extends Activity implements Observer {
+//<<<<<<< HEAD
 	private static final String TAG = "chat.UseActivity";
 	
 	private static final int MENU_REFRESH = 0;
@@ -55,6 +42,8 @@ public class ViewChannelActivity extends Activity implements Observer {
 		Log.i(TAG, "onCreate()");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.viewchannel);
+		
+		final Activity self = this;
 		/*
 		 * Keep a pointer to the Android Appliation class around. We use this as
 		 * the Model for our MVC-based application. Whenever we are started we
@@ -68,6 +57,19 @@ public class ViewChannelActivity extends Activity implements Observer {
 				this, android.R.layout.test_list_item);
 		final ListView channelList = (ListView) findViewById(R.id.useJoinChannelList);
 		channelList.setAdapter(channelListAdapter);
+      channelList.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
+				String str = ((TextView)v).getText().toString();
+				mChatApplication.useSetChannelName(str);
+				mChatApplication.useJoinChannel();
+				
+				Intent i = new Intent(self, UseActivity.class);
+				//i.putExtra("name", ((TextView)v).getText());
+				self.startActivity(i);
+			}
+      });
+
 
 		List<String> channels = mChatApplication.getFoundChannels();
 		for (String channel : channels) {
@@ -86,6 +88,74 @@ public class ViewChannelActivity extends Activity implements Observer {
 		mChatApplication.addObserver(this);
 
 	}
+//=======
+//    private static final String TAG = "chat.UseActivity";
+//
+//    public void onCreate(Bundle savedInstanceState) {
+//        Log.i(TAG, "onCreate()");
+//    	super.onCreate(savedInstanceState);
+//        setContentView(R.layout.viewchannel);
+//        
+//        final Activity self = this;
+//
+////        mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+////        ListView hlv = (ListView) findViewById(R.id.useHistoryList);
+////        hlv.setAdapter(mHistoryList);
+//
+////        mChannelName = (TextView)findViewById(R.id.useChannelName);
+////        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);        
+//
+//        /*
+//         * Keep a pointer to the Android Appliation class around.  We use this
+//         * as the Model for our MVC-based application.    Whenever we are started
+//         * we need to "check in" with the application so it can ensure that our
+//         * required services are running.
+//         */
+//        mChatApplication = (ChatApplication)getApplication();
+//        mChatApplication.checkin();
+//        
+//        ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
+//    	final ListView channelList = (ListView)findViewById(R.id.useJoinChannelList);
+//        channelList.setAdapter(channelListAdapter);
+//        channelList.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
+//				String str = ((TextView)v).getText().toString();
+//				mChatApplication.useSetChannelName(str);
+//				mChatApplication.useJoinChannel();
+//				
+//				Intent i = new Intent(self, UseActivity.class);
+//				//i.putExtra("name", ((TextView)v).getText());
+//				self.startActivity(i);
+//			}
+//        });
+//        
+//	    List<String> channels = mChatApplication.getFoundChannels();
+//        for (String channel : channels) {
+//        	int lastDot = channel.lastIndexOf('.');
+//        	if (lastDot < 0) {
+//        		continue;
+//        	}
+//            channelListAdapter.add(channel.substring(lastDot + 1));
+//        }
+//	    channelListAdapter.notifyDataSetChanged();
+//
+//        /*
+//         * Call down into the model to get its current state.  Since the model
+//         * outlives its Activities, this may actually be a lot of state and not
+//         * just empty.
+//         */
+//        updateChannelState();
+//        updateHistory();
+//
+//        /*
+//         * Now that we're all ready to go, we are ready to accept notifications
+//         * from other components.
+//         */
+//        mChatApplication.addObserver(this);
+//
+//    }
+//>>>>>>> chanelview
 
 	public void onDestroy() {
 		Log.i(TAG, "onDestroy()");

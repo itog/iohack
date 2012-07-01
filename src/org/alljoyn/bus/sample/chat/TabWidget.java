@@ -41,16 +41,8 @@ public class TabWidget extends TabActivity {
         Intent intent;
 
 
-        /*
         intent = new Intent().setClass(this, UseActivity.class);
         spec = tabHost.newTabSpec("use").setIndicator("", res.getDrawable(R.drawable.ic_tab_use)).setContent(intent);
-        tabHost.addTab(spec);
-        */
-
-
-
-        intent = new Intent().setClass(this, ViewChannelActivity.class);
-        spec = tabHost.newTabSpec("viewchannel").setIndicator("", res.getDrawable(R.drawable.ic_tab_use)).setContent(intent);
         tabHost.addTab(spec);
 
 

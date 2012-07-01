@@ -16,6 +16,7 @@
 
 package org.alljoyn.bus.sample.chat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 
@@ -88,7 +89,7 @@ public class DialogBuilder {
     	return dialog;
     }
     
-    public Dialog createUseLeaveDialog(Activity activity, final ChatApplication application) {
+    public Dialog createUseLeaveDialog(final Activity activity, final ChatApplication application) {
        	Log.i(TAG, "createUseLeaveDialog()");
     	final Dialog dialog = new Dialog(activity);
     	dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
@@ -100,6 +101,7 @@ public class DialogBuilder {
     			application.useLeaveChannel();
     			application.useSetChannelName("Not set");
     			dialog.cancel();
+    			activity.finish();
     		}
     	});
 	            
@@ -113,7 +115,8 @@ public class DialogBuilder {
     	return dialog;
     }
     
-    public Dialog createHostNameDialog(Activity activity, final ChatApplication application) {
+    @SuppressLint("NewApi")
+	public Dialog createHostNameDialog(Activity activity, final ChatApplication application) {
        	Log.i(TAG, "createHostNameDialog()");
     	final Dialog dialog = new Dialog(activity);
     	dialog.requestWindowFeature(dialog.getWindow().FEATURE_NO_TITLE);
