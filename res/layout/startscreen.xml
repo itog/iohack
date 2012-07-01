@@ -28,12 +28,11 @@
         android:layout_marginRight="5dip"
         android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="0dip"
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_name" /> <!-- replace text label with icon -->
 
         <EditText
             android:id="@+id/st_name"
@@ -63,12 +62,11 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip" >
 
-        <TextView
-            android:layout_width="0dip"
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Email"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_email" /> <!-- replace text label with icon -->
 
         <EditText
             android:id="@+id/st_email"
@@ -98,12 +96,11 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip" >
 
-        <TextView
-            android:layout_width="0dip"
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Phone"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_phone" /> <!-- replace text label with icon -->
 
         <EditText
             android:id="@+id/st_phone"
@@ -131,14 +128,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dip"
         android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip" >
+        android:layout_marginRight="5dip" > <!-- replace text label with icon -->
 
-        <TextView
-            android:layout_width="0dip"
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Google+"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_gplus_big" />
 
         <EditText
             android:id="@+id/st_plus"
@@ -166,20 +162,27 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dip"
         android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip" >
+        android:layout_marginRight="5dip"
+        android:orientation="horizontal" >
 
         <TextView
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Twitter"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_twitter" /> <!-- replace text label with icon -->
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_twitter" />
 
         <EditText
             android:id="@+id/st_twitter"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:layout_weight="2.5"
+            android:ems="10"
             android:hint="Twitter Handle"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -204,12 +207,11 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip" >
 
-        <TextView
-            android:layout_width="0dip"
+        <ImageButton
+            android:id="@+id/imageButton6"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Facebook"
-            android:textAppearance="?android:attr/textAppearanceSmall" /> <!-- replace text label with icon -->
+            android:src="@drawable/ic_action_facebook" /> <!-- replace text label with icon -->
 
         <EditText
             android:id="@+id/st_facebook"
@@ -232,6 +234,7 @@
             android:onClick="importBtn"
             android:text=" i "
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </LinearLayout>
 </RelativeLayout>
 
