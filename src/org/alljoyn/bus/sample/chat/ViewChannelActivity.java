@@ -49,13 +49,6 @@ public class ViewChannelActivity extends Activity implements Observer {
         Log.i(TAG, "onCreate()");
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.viewchannel);
-
-        mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-        ListView hlv = (ListView) findViewById(R.id.useHistoryList);
-        hlv.setAdapter(mHistoryList);
-
-        mChannelName = (TextView)findViewById(R.id.useChannelName);
-        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
         
         
 
@@ -82,13 +75,7 @@ public class ViewChannelActivity extends Activity implements Observer {
         }
 	    channelListAdapter.notifyDataSetChanged();
 
-        /*
-         * Call down into the model to get its current state.  Since the model
-         * outlives its Activities, this may actually be a lot of state and not
-         * just empty.
-         */
-        updateChannelState();
-        updateHistory();
+
 
         /*
          * Now that we're all ready to go, we are ready to accept notifications
@@ -135,63 +122,7 @@ public class ViewChannelActivity extends Activity implements Observer {
         return result;
     }
 
-    public synchronized void update(Observable o, Object arg) {
-        Log.i(TAG, "update(" + arg + ")");
-        String qualifier = (String)arg;
-
-        if (qualifier.equals(ChatApplication.APPLICATION_QUIT_EVENT)) {
-            Message message = mHandler.obtainMessage(HANDLE_APPLICATION_QUIT_EVENT);
-            mHandler.sendMessage(message);
-        }
-
-        if (qualifier.equals(ChatApplication.HISTORY_CHANGED_EVENT)) {
-            Message message = mHandler.obtainMessage(HANDLE_HISTORY_CHANGED_EVENT);
-            mHandler.sendMessage(message);
-        }
-
-        if (qualifier.equals(ChatApplication.USE_CHANNEL_STATE_CHANGED_EVENT)) {
-            Message message = mHandler.obtainMessage(HANDLE_CHANNEL_STATE_CHANGED_EVENT);
-            mHandler.sendMessage(message);
-        }
-
-        if (qualifier.equals(ChatApplication.ALLJOYN_ERROR_EVENT)) {
-            Message message = mHandler.obtainMessage(HANDLE_ALLJOYN_ERROR_EVENT);
-            mHandler.sendMessage(message);
-        }
-    }
-
-    private void updateHistory() {
-        Log.i(TAG, "updateHistory()");
-	    mHistoryList.clear();
-	    List<String> messages = mChatApplication.getHistory();
-        for (String message : messages) {
-            mHistoryList.add(message);
-        }
-	    mHistoryList.notifyDataSetChanged();
-    }
-
-    private void updateChannelState() {
-        Log.i(TAG, "updateHistory()");
-    	AllJoynService.UseChannelState channelState = mChatApplication.useGetChannelState();
-    	String name = mChatApplication.useGetChannelName();
-    	if (name == null) {
-    		name = "Not set";
-    	}
-        mChannelName.setText(name);
-
-        switch (channelState) {
-        case IDLE:
-            mChannelStatus.setText("Idle");
-            //mJoinButton.setEnabled(true);
-            //mLeaveButton.setEnabled(false);
-            break;
-        case JOINED:
-            mChannelStatus.setText("Joined");
-            //mJoinButton.setEnabled(false);
-            //mLeaveButton.setEnabled(true);
-            break;
-        }
-    }
+   
 
     /**
      * An AllJoyn error has happened.  Since this activity pops up first we
@@ -204,52 +135,17 @@ public class ViewChannelActivity extends Activity implements Observer {
     	}
     }
 
-    private static final int HANDLE_APPLICATION_QUIT_EVENT = 0;
-    private static final int HANDLE_HISTORY_CHANGED_EVENT = 1;
-    private static final int HANDLE_CHANNEL_STATE_CHANGED_EVENT = 2;
-    private static final int HANDLE_ALLJOYN_ERROR_EVENT = 3;
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-            case HANDLE_APPLICATION_QUIT_EVENT:
-	            {
-	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_APPLICATION_QUIT_EVENT");
-	                finish();
-	            }
-	            break;
-            case HANDLE_HISTORY_CHANGED_EVENT:
-                {
-                    Log.i(TAG, "mHandler.handleMessage(): HANDLE_HISTORY_CHANGED_EVENT");
-                    updateHistory();
-                    break;
-                }
-            case HANDLE_CHANNEL_STATE_CHANGED_EVENT:
-	            {
-	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_CHANNEL_STATE_CHANGED_EVENT");
-	                updateChannelState();
-	                break;
-	            }
-            case HANDLE_ALLJOYN_ERROR_EVENT:
-	            {
-	                Log.i(TAG, "mHandler.handleMessage(): HANDLE_ALLJOYN_ERROR_EVENT");
-	                alljoynError();
-	                break;
-	            }
-            default:
-                break;
-            }
-        }
-    };
-
     private ChatApplication mChatApplication = null;
 
     private ArrayAdapter<String> mHistoryList;
 
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+
     // private Button mJoinButton;
     // private Button mLeaveButton;
 
-    private TextView mChannelName;
-
-    private TextView mChannelStatus;
 }
