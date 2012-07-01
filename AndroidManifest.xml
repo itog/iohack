@@ -11,9 +11,10 @@
     <!-- Permission required to use the Bluetooth transport -->
     <uses-permission android:name="android.permission.BLUETOOTH" >
     </uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" >
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" >      
     </uses-permission>
-
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -28,19 +29,17 @@
             android:name=".StartScreen"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
+            <intent-filter>
+                <!--
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                -->
+            </intent-filter>
         </activity>
         <activity
             android:name=".TabWidget"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".HostActivity"

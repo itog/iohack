@@ -107,7 +107,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2.5"
             android:hint="Phone"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:inputType="phone" />
 
         <Button
             android:id="@+id/st_phone_btn"
