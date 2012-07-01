@@ -20,6 +20,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,16 +33,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ViewChannelActivity extends Activity implements Observer {
-//<<<<<<< HEAD
+
 	private static final String TAG = "chat.UseActivity";
 	
 	private static final int MENU_REFRESH = 0;
 	private static final int MENU_ADDCHANNEL = 1;
 	ChatApplication mChatApplication;
+	
+	
 	public void onCreate(Bundle savedInstanceState) {
 		Log.i(TAG, "onCreate()");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.viewchannel);
+		
 		
 		final Activity self = this;
 		/*
@@ -54,7 +58,7 @@ public class ViewChannelActivity extends Activity implements Observer {
 		mChatApplication.checkin();
 
 		ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(
-				this, android.R.layout.test_list_item);
+				this, android.R.layout.simple_list_item_1);
 		final ListView channelList = (ListView) findViewById(R.id.useJoinChannelList);
 		channelList.setAdapter(channelListAdapter);
       channelList.setOnItemClickListener(new OnItemClickListener() {
@@ -88,74 +92,6 @@ public class ViewChannelActivity extends Activity implements Observer {
 		mChatApplication.addObserver(this);
 
 	}
-//=======
-//    private static final String TAG = "chat.UseActivity";
-//
-//    public void onCreate(Bundle savedInstanceState) {
-//        Log.i(TAG, "onCreate()");
-//    	super.onCreate(savedInstanceState);
-//        setContentView(R.layout.viewchannel);
-//        
-//        final Activity self = this;
-//
-////        mHistoryList = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-////        ListView hlv = (ListView) findViewById(R.id.useHistoryList);
-////        hlv.setAdapter(mHistoryList);
-//
-////        mChannelName = (TextView)findViewById(R.id.useChannelName);
-////        mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);        
-//
-//        /*
-//         * Keep a pointer to the Android Appliation class around.  We use this
-//         * as the Model for our MVC-based application.    Whenever we are started
-//         * we need to "check in" with the application so it can ensure that our
-//         * required services are running.
-//         */
-//        mChatApplication = (ChatApplication)getApplication();
-//        mChatApplication.checkin();
-//        
-//        ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-//    	final ListView channelList = (ListView)findViewById(R.id.useJoinChannelList);
-//        channelList.setAdapter(channelListAdapter);
-//        channelList.setOnItemClickListener(new OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
-//				String str = ((TextView)v).getText().toString();
-//				mChatApplication.useSetChannelName(str);
-//				mChatApplication.useJoinChannel();
-//				
-//				Intent i = new Intent(self, UseActivity.class);
-//				//i.putExtra("name", ((TextView)v).getText());
-//				self.startActivity(i);
-//			}
-//        });
-//        
-//	    List<String> channels = mChatApplication.getFoundChannels();
-//        for (String channel : channels) {
-//        	int lastDot = channel.lastIndexOf('.');
-//        	if (lastDot < 0) {
-//        		continue;
-//        	}
-//            channelListAdapter.add(channel.substring(lastDot + 1));
-//        }
-//	    channelListAdapter.notifyDataSetChanged();
-//
-//        /*
-//         * Call down into the model to get its current state.  Since the model
-//         * outlives its Activities, this may actually be a lot of state and not
-//         * just empty.
-//         */
-//        updateChannelState();
-//        updateHistory();
-//
-//        /*
-//         * Now that we're all ready to go, we are ready to accept notifications
-//         * from other components.
-//         */
-//        mChatApplication.addObserver(this);
-//
-//    }
-//>>>>>>> chanelview
 
 	public void onDestroy() {
 		Log.i(TAG, "onDestroy()");
