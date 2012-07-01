@@ -43,6 +43,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UseActivity extends Activity implements Observer {
 	private static final String TAG = "chat.UseActivity";
@@ -277,6 +279,8 @@ public class UseActivity extends Activity implements Observer {
 	private TextView mChannelName;
 
 	private TextView mChannelStatus;
+	
+	int[] myImageList = new int[]{R.drawable.android_80_aussie, R.drawable.android_80_avatar2, R.drawable.android_80_bacon, R.drawable.android_80_bigburger, R.drawable.android_80_butterfly, R.drawable.android_80_c3po, R.drawable.android_80_camo, R.drawable.android_80_cyan, R.drawable.android_80_domokun, R.drawable.android_80_grass, R.drawable.android_80_h2g2};
 
 	@SuppressLint({ "ParserError", "ParserError", "ParserError" })
 	public class SampleAdapter extends ArrayAdapter<String> {
@@ -303,6 +307,8 @@ public class UseActivity extends Activity implements Observer {
 			String item = this.getItem(position);
 
 			((TextView) view.findViewById(R.id.textName)).setText(item);
+			ImageView iv = (ImageView)view.findViewById(R.id.imageIcon);
+			iv.setImageResource(myImageList[position]);
 
 			return view;
 		}
