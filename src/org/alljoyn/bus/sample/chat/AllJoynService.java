@@ -719,6 +719,8 @@ public class AllJoynService extends Service implements Observer {
         	return;
         }
     	
+        org.alljoyn.bus.alljoyn.DaemonInit.PrepareDaemon(getApplicationContext());
+        
     	status = mBus.connect();
     	if (status != Status.OK) {
     		mChatApplication.alljoynError(ChatApplication.Module.GENERAL, "Unable to connect to the bus: (" + status + ")");
@@ -1107,26 +1109,6 @@ public class AllJoynService extends Service implements Observer {
              	mUseChannelState = UseChannelState.IDLE;
               	mChatApplication.useSetChannelState(mUseChannelState);
             }
-
-			@Override
-			public void sessionMemberAdded(int sessionId, String uniqueName) {
-				//get contact information of mine
-				String name = "anonymous";
-				String email = "anonymous@foo.bar.com";
-				try {
-					if (mJoinedToSelf) {
-						if (mHostChatInterface != null) {
-							mHostChatInterface.Contact(name, email);
-						}
-					} else {
-						mChatInterface.Contact(name, email);
-					}
-				} catch (BusException ex) {
-		    		mChatApplication.alljoynError(ChatApplication.Module.USE, "Bus exception while sending message: (" + ex + ")");
-				}
-			}
-            
-            
         });
         
         if (status == Status.OK) {
@@ -1139,6 +1121,21 @@ public class AllJoynService extends Service implements Observer {
         
         SignalEmitter emitter = new SignalEmitter(mChatService, mUseSessionId, SignalEmitter.GlobalBroadcast.Off);
         mChatInterface = emitter.getInterface(ChatInterface.class);
+        
+        //TODO get contact information of mine
+		String name = "anonymous";
+		String email = "anonymous@foo.bar.com";
+		try {
+			if (mJoinedToSelf) {
+				if (mHostChatInterface != null) {
+					mHostChatInterface.Contact(name, email);
+				}
+			} else {
+				mChatInterface.Contact(name, email);
+			}
+		} catch (BusException ex) {
+    		mChatApplication.alljoynError(ChatApplication.Module.USE, "Bus exception while sending message: (" + ex + ")");
+		}
         
      	mUseChannelState = UseChannelState.JOINED;
       	mChatApplication.useSetChannelState(mUseChannelState);
