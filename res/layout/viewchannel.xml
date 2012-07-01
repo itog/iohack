@@ -8,12 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Channels" 
+        android:text="Channels"
+		android:textSize="40dp"
         style="@style/black_text"/>
 
     <ListView
         android:id="@+id/useJoinChannelList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="40dp"/>
 
 </LinearLayout>

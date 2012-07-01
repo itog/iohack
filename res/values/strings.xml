@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">AllJoyn Chat Sample for Android</string>
 
-
     <string name="app_short_name">ADK 2012</string>
     <string name="app_long_name">ADK DemoKit 2012</string>
     <string name="clock">Clock</string>
@@ -72,4 +71,13 @@
     <string name="set_bt_name_title">Set Bluetooth Name</string>
     <string name="set_bt_name_ok">OK</string>
     <string name="set_bt_name_cancel">Cancel</string>
+
+    <string name="gplusfield">Google+</string>
+    <string name="namefield">Name</string>
+    <string name="emailfield">E-Mail</string>
+    <string name="facebookfield">Facebook</string>
+    <string name="phonefield">Phone Number</string>
+    <string name="importBtnLabel"> i </string>
+    <string name="twitterfield">Twitter Handle</string>
+
 </resources>
