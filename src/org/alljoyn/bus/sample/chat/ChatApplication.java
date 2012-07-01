@@ -583,10 +583,7 @@ public class ChatApplication extends Application implements Observable {
 		if (mHistory.size() == HISTORY_MAX) {
 			mHistory.remove(0);
 		}
-        
-		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date date = new Date();
-		mHistory.add("[" + dateFormat.format(date) + "] (" + nickname + ") " + message);
+		mHistory.add(message);
 		notifyObservers(HISTORY_CHANGED_EVENT);
 	}
 	
