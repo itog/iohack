@@ -27,7 +27,7 @@
             android:layout_marginBottom="10dip"
             android:layout_marginLeft="5dip"
             android:layout_marginRight="5dip"
-            android:orientation="horizontal" > <!-- replace text label with icon -->
+            android:orientation="horizontal" >
 
             <EditText
                 android:id="@+id/st_name"
@@ -38,7 +38,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/nameButton"
+                android:contentDescription="@string/namefield"  
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_name"
@@ -65,7 +66,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:contentDescription="@string/emailfield"  
+                android:id="@+id/emailButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_email"
@@ -83,6 +85,7 @@
             android:layout_marginRight="5dip" > <!-- replace text label with icon -->
 
             <EditText
+                
                 android:id="@+id/st_phone"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -92,7 +95,8 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:contentDescription="@string/phonefield"
+                android:id="@+id/phoneButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_action_phone"
