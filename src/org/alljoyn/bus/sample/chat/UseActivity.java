@@ -29,6 +29,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -79,6 +80,18 @@ public class UseActivity extends Activity implements Observer {
         mChannelName = (TextView)findViewById(R.id.useChannelName);
         mChannelStatus = (TextView)findViewById(R.id.useChannelStatus);
         
+        
+        mAppsButton = (Button)findViewById(R.id.callActions);
+        mAppsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	/*
+            	Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT);
+                toast.show();*/
+            	Intent appsIntent = new Intent(UseActivity.this,AppsActivity.class);
+            	UseActivity.this.startActivity(appsIntent);
+            	
+            }
+        });
         /*
          * Keep a pointer to the Android Appliation class around.  We use this
          * as the Model for our MVC-based application.    Whenever we are started
@@ -253,7 +266,7 @@ public class UseActivity extends Activity implements Observer {
     
 //    private Button mJoinButton;
     private Button mLeaveButton;
-    
+    private Button mAppsButton;
     private TextView mChannelName;
       
     private TextView mChannelStatus;
