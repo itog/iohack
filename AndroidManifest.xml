@@ -20,12 +20,16 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="false" />
-
+    <uses-feature
+        android:name="android.hardware.usb.accessory"
+        android:required="true" />
+    
     <application
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
         android:name=".ChatApplication"
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
+         <uses-library android:name="com.android.future.usb.accessory" />
         <activity
             android:name=".StartScreen"
             android:label="@string/app_name"
@@ -69,6 +73,28 @@
         
         <service android:name="org.alljoyn.bus.alljoyn.BundleDaemonService">
 		</service>
+		
+        
+        <activity
+            android:name="com.google.android.apps.adk2.ConnectActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.google.android.apps.adk2.USBAccessoryActivity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="" >
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+                android:resource="@xml/usb_accessory_filter" />
+        </activity>
     </application>
 
 </manifest>

@@ -34,6 +34,7 @@ import org.alljoyn.bus.SignalEmitter;
 import org.alljoyn.bus.Status;
 import org.alljoyn.bus.annotation.BusSignalHandler;
 
+
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -1109,6 +1110,17 @@ public class AllJoynService extends Service implements Observer {
              	mUseChannelState = UseChannelState.IDLE;
               	mChatApplication.useSetChannelState(mUseChannelState);
             }
+
+			@Override
+			public void sessionMemberAdded(int sessionId, String uniqueName) {
+				HomeActivity h = HomeActivity.get();
+				if (h != null) {
+					h.notifyAdk();
+				} else {
+					Log.v("********", "no HomeActivity");
+				}
+			}            
+            
         });
 
         if (status == Status.OK) {
@@ -1121,6 +1133,13 @@ public class AllJoynService extends Service implements Observer {
 
         SignalEmitter emitter = new SignalEmitter(mChatService, mUseSessionId, SignalEmitter.GlobalBroadcast.Off);
         mChatInterface = emitter.getInterface(ChatInterface.class);
+        
+		HomeActivity h = HomeActivity.get();
+		if (h != null) {
+			h.notifyAdk();
+		} else {
+			Log.v("********", "no HomeActivity");
+		}
 
         //TODO get contact information of mine
 		String name = "anonymous";
