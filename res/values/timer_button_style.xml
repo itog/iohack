@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <resources>
+        <style name="timer_button">
+        	<item name="android:textSize">25dp</item>
+        	<item name="android:textStyle">bold</item>
+        	<item name="android:layout_marginLeft">8dp</item>
+        	<item name="android:layout_marginRight">8dp</item>
+        	<item name="android:layout_marginTop">4dp</item>
+        	<item name="android:layout_marginBottom">4dp</item> 
+        	<item name="android:background">@drawable/white_bg</item> 
+        </style>
+    </resources>
+    

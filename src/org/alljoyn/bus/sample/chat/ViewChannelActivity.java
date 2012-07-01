@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,12 +53,10 @@ public class ViewChannelActivity extends Activity implements Observer {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.viewchannel);
 
-		/*
 		mHistoryList = new ArrayAdapter<String>(this,
 				android.R.layout.test_list_item);
-		ListView hlv = (ListView) findViewById(R.id.);
+		ListView hlv = (ListView) findViewById(R.id.useHistoryList);
 		hlv.setAdapter(mHistoryList);
-		*/
 
 		mChannelName = (TextView) findViewById(R.id.useChannelName);
 		mChannelStatus = (TextView) findViewById(R.id.useChannelStatus);
@@ -72,6 +69,21 @@ public class ViewChannelActivity extends Activity implements Observer {
 		 */
 		mChatApplication = (ChatApplication) getApplication();
 		mChatApplication.checkin();
+
+		ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.test_list_item);
+		final ListView channelList = (ListView) findViewById(R.id.useJoinChannelList);
+		channelList.setAdapter(channelListAdapter);
+
+		List<String> channels = mChatApplication.getFoundChannels();
+		for (String channel : channels) {
+			int lastDot = channel.lastIndexOf('.');
+			if (lastDot < 0) {
+				continue;
+			}
+			channelListAdapter.add(channel.substring(lastDot + 1));
+		}
+		channelListAdapter.notifyDataSetChanged();
 
 		/*
 		 * Call down into the model to get its current state. Since the model
@@ -86,34 +98,7 @@ public class ViewChannelActivity extends Activity implements Observer {
 		 * from other components.
 		 */
 		mChatApplication.addObserver(this);
-		// showDialog(DIALOG_JOIN_ID);
-		createUseJoinDialog();
-	}
 
-	private void createUseJoinDialog(){
-        ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(this, android.R.layout.test_list_item);
-    	//final ListView channelList = (ListView)findViewById(R.id.
-        //channelList.setAdapter(channelListAdapter);
-        final ListView channelList = null;
-
-	    List<String> channels = mChatApplication.getFoundChannels();
-        for (String channel : channels) {
-        	int lastDot = channel.lastIndexOf('.');
-        	if (lastDot < 0) {
-        		continue;
-        	}
-            channelListAdapter.add(channel.substring(lastDot + 1));
-        }
-	    channelListAdapter.notifyDataSetChanged();
-
-    	channelList.setOnItemClickListener(new ListView.OnItemClickListener() {
-    		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-    			String name = channelList.getItemAtPosition(position).toString();
-    			mChatApplication.useSetChannelName(name);
-    			mChatApplication.useJoinChannel();
-    			// this.removeDialog(UseActivity.DIALOG_JOIN_ID);
-    		}
-    	});
 	}
 
 	public void onDestroy() {
@@ -126,6 +111,8 @@ public class ViewChannelActivity extends Activity implements Observer {
 	public static final int DIALOG_JOIN_ID = 0;
 	public static final int DIALOG_LEAVE_ID = 1;
 	public static final int DIALOG_ALLJOYN_ERROR_ID = 2;
+	private static final int MENU_REFRESH = 0;
+	private static final int MENU_ADDCHANNEL = 1;
 
 	protected Dialog onCreateDialog(int id) {
 		Log.i(TAG, "onCreateDialog()");
@@ -228,8 +215,6 @@ public class ViewChannelActivity extends Activity implements Observer {
 	private static final int HANDLE_HISTORY_CHANGED_EVENT = 1;
 	private static final int HANDLE_CHANNEL_STATE_CHANGED_EVENT = 2;
 	private static final int HANDLE_ALLJOYN_ERROR_EVENT = 3;
-	private static final int MENU_REFRESH = 0;
-	private static final int MENU_ADDCHANNEL = 1;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -265,8 +250,14 @@ public class ViewChannelActivity extends Activity implements Observer {
 	};
 
 	private ChatApplication mChatApplication = null;
+
 	private ArrayAdapter<String> mHistoryList;
+
+	// private Button mJoinButton;
+	// private Button mLeaveButton;
+
 	private TextView mChannelName;
+
 	private TextView mChannelStatus;
 
 	@Override
@@ -281,7 +272,7 @@ public class ViewChannelActivity extends Activity implements Observer {
 		boolean ret = true;
 		switch (item.getItemId()) {
 		case MENU_REFRESH:
-			// do nothing
+			refreshChannelList();
 			return true;
 		case MENU_ADDCHANNEL:
 			Intent i = new Intent(this, HostActivity.class);
@@ -289,5 +280,22 @@ public class ViewChannelActivity extends Activity implements Observer {
 			return true;
 		}
 		return true;
+	}
+
+	private void refreshChannelList() {
+		ArrayAdapter<String> channelListAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.test_list_item);
+		final ListView channelList = (ListView) findViewById(R.id.useJoinChannelList);
+		channelList.setAdapter(channelListAdapter);
+
+		List<String> channels = mChatApplication.getFoundChannels();
+		for (String channel : channels) {
+			int lastDot = channel.lastIndexOf('.');
+			if (lastDot < 0) {
+				continue;
+			}
+			channelListAdapter.add(channel.substring(lastDot + 1));
+		}
+		channelListAdapter.notifyDataSetChanged();
 	}
 }
