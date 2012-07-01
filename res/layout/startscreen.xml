@@ -28,7 +28,8 @@
         android:orientation="horizontal" >
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:contentDescription="@string/namefield"                        
+            android:id="@+id/nameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_name" /> <!-- replace text label with icon -->
@@ -62,7 +63,8 @@
         android:layout_marginRight="5dip" >
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:contentDescription="@string/emailfield"                                    
+            android:id="@+id/emailButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_email" /> <!-- replace text label with icon -->
@@ -96,7 +98,8 @@
         android:layout_marginRight="5dip" >
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:contentDescription="@string/phonefield"                                                
+            android:id="@+id/phoneButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_phone" /> <!-- replace text label with icon -->
@@ -131,7 +134,8 @@
         android:layout_marginRight="5dip" > <!-- replace text label with icon -->
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:contentDescription="@string/gplusfield"                                                
+            android:id="@+id/gplusButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_gplus_big" />
@@ -171,7 +175,8 @@
             android:src="@drawable/ic_action_twitter" /> <!-- replace text label with icon -->
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:contentDescription="@string/twitterfield"            
+            android:id="@+id/twitterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_twitter" />
@@ -208,7 +213,8 @@
         android:layout_marginRight="5dip" >
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:contentDescription="@string/facebookfield"
+            android:id="@+id/facebookButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_facebook" /> <!-- replace text label with icon -->
