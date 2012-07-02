@@ -1250,6 +1250,38 @@ public class AllJoynService extends Service implements Observer {
 
     @BusSignalHandler(iface = "org.alljoyn.bus.samples.chat", signal = "Contact")
     public void Contact(String name, String email, String phone) {
+    	
+    	String uniqueName = mBus.getUniqueName();
+    	MessageContext ctx = mBus.getMessageContext();
+        Log.i(TAG, "Chat(): use sessionId is " + mUseSessionId);
+        Log.i(TAG, "Chat(): message sessionId is " + ctx.sessionId);
+    	
+        if (ctx.sender.equals(uniqueName)) {
+            Log.i(TAG, "Chat(): dropped our own signal received on session " + ctx.sessionId);
+    		return;
+    	}
+        
+        if (mChatApplication.nameMap.containsKey(name)){
+        	return;
+        }
+    	
+    	prefs = getSharedPreferences(StartScreen.PREFS_NAME, 0);
+        String myEmail = prefs.getString(StartScreen.EMAIL_KEY, null);
+        String myName = prefs.getString(StartScreen.NAME_KEY, null);
+        String myPhone = prefs.getString(StartScreen.PHONE_KEY, null);
+        //TODO get contact information of mine
+		try {
+			if (mJoinedToSelf) {
+				if (mHostChatInterface != null) {
+					mHostChatInterface.Contact(myName, myEmail, myPhone);
+				}
+			} else {
+				mChatInterface.Contact(myName, myEmail, myPhone);
+			}
+		} catch (BusException ex) {
+    		mChatApplication.alljoynError(ChatApplication.Module.USE, "Bus exception while sending message: (" + ex + ")");
+		}
+    	
 
         /*
     	 * See the long comment in doJoinSession() for more explanation of
@@ -1261,10 +1293,6 @@ public class AllJoynService extends Service implements Observer {
     	 * locally echo the signal.
 
      	 */
-    	String uniqueName = mBus.getUniqueName();
-    	MessageContext ctx = mBus.getMessageContext();
-        Log.i(TAG, "Contact(): use sessionId is " + mUseSessionId);
-        Log.i(TAG, "Contact(): message sessionId is " + ctx.sessionId);
 
 
 
