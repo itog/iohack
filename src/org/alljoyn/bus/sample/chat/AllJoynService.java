@@ -35,8 +35,6 @@ import org.alljoyn.bus.Status;
 import org.alljoyn.bus.annotation.BusSignalHandler;
 
 
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -56,8 +54,6 @@ import android.util.Log;
 @SuppressLint("NewApi")
 public class AllJoynService extends Service implements Observer {
 	private static final String TAG = "chat.AllJoynService";
-	private SoundPool soundPool;
-	int soundIds[];
 	/**
 	 * We don't use the bindery to communiate between any client and this
 	 * service so we return null.
@@ -100,10 +96,6 @@ public class AllJoynService extends Service implements Observer {
          */
         mBackgroundHandler.connect();
         mBackgroundHandler.startDiscovery();
-        
-		soundIds = new int[255];
-		soundPool = new SoundPool(255, AudioManager.STREAM_MUSIC, 0);
-		soundIds[0] = soundPool.load(this, R.raw.fallbackring, 1);
  	}
 
     private static final int NOTIFICATION_ID = 0xdefaced;
@@ -1167,8 +1159,6 @@ public class AllJoynService extends Service implements Observer {
 		HomeActivity h = HomeActivity.get();
 		if (h != null) {
 			h.notifyAdk();
-		} else {
-			soundPool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
 		}
     }
     /**

@@ -1025,6 +1025,11 @@ public class HomeActivity extends Activity implements OnClickListener,
 	}
 	
 	public void notifyAdk() {
+		if (mConnection == null) {
+			Log.v("", "no adk connection");
+			return;
+		}
+		
 		soundPool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
 		
 		new Thread(new Runnable() {
