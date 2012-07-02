@@ -908,6 +908,8 @@ public class AllJoynService extends Service implements Observer {
                 mHostSessionId = id;
                 SignalEmitter emitter = new SignalEmitter(mChatService, id, SignalEmitter.GlobalBroadcast.Off);
                 mHostChatInterface = emitter.getInterface(ChatInterface.class);
+                
+                notifySound();
             }
         });
 
@@ -1121,12 +1123,7 @@ public class AllJoynService extends Service implements Observer {
 
 			@Override
 			public void sessionMemberAdded(int sessionId, String uniqueName) {
-				HomeActivity h = HomeActivity.get();
-				if (h != null) {
-					h.notifyAdk();
-				} else {
-					soundPool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
-				}
+				notifySound();
 			}            
             
         });
@@ -1142,14 +1139,8 @@ public class AllJoynService extends Service implements Observer {
         SignalEmitter emitter = new SignalEmitter(mChatService, mUseSessionId, SignalEmitter.GlobalBroadcast.Off);
         mChatInterface = emitter.getInterface(ChatInterface.class);
         
-
-		HomeActivity h = HomeActivity.get();
-		if (h != null) {
-			h.notifyAdk();
-		} else {
-			soundPool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
-		}
-
+        notifySound();
+        
         prefs = getSharedPreferences(StartScreen.PREFS_NAME, 0);
         String email = prefs.getString(StartScreen.EMAIL_KEY, null);
         String name = prefs.getString(StartScreen.NAME_KEY, null);
@@ -1172,6 +1163,14 @@ public class AllJoynService extends Service implements Observer {
       	mChatApplication.useSetChannelState(mUseChannelState);
     }
 
+    void notifySound() {
+		HomeActivity h = HomeActivity.get();
+		if (h != null) {
+			h.notifyAdk();
+		} else {
+			soundPool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
+		}
+    }
     /**
      * This is the interface over which the chat messages will be sent.
      */
