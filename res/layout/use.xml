@@ -62,5 +62,20 @@
         android:divider="#ff505050"
         android:dividerHeight="1dp"
         android:transcriptMode="alwaysScroll" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
+
+        <Button
+            android:id="@+id/callActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    	    android:text="Actions"
+    	    style="@style/app_button"
+        />  
+    </LinearLayout>
 </LinearLayout>
