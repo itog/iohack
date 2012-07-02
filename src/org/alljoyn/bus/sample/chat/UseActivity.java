@@ -35,7 +35,9 @@ import android.app.Dialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
+
 import android.content.DialogInterface;
+
 import android.content.Intent;
 
 import android.view.KeyEvent;
@@ -123,6 +125,19 @@ public class UseActivity extends Activity implements Observer {
         mLeaveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_LEAVE_ID);
+            }
+        });
+        
+        
+        mAppsButton = (Button)findViewById(R.id.callActions);
+        mAppsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	/*
+            	Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT);
+                toast.show();*/
+            	Intent appsIntent = new Intent(UseActivity.this,AppsActivity.class);
+            	UseActivity.this.startActivity(appsIntent);
+            	
             }
         });
         
@@ -304,6 +319,8 @@ public class UseActivity extends Activity implements Observer {
 	private ArrayAdapter<String> mHistoryList;
 
 	private Button mLeaveButton;
+	
+	private Button mAppsButton;
 
 	private TextView mChannelName;
 
