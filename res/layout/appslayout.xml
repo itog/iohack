@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="418dp" >
+
+    <TextView
+        android:id="@+id/appstitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="5dip"
+        android:gravity="center"
+        android:text="Apps"
+        android:textSize="40dp"/>
+
+    <LinearLayout
+        android:id="@+id/contacts_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appstitle"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:orientation="horizontal" >
+
+
+
+        <Button
+            android:id="@+id/app_contacts_btn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="contactsBtn"
+            android:text=" Contacts "
+            android:textSize="30dp" 
+            style="@style/app_button"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/music_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contacts_grp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip" >
+
+      
+
+        <Button
+            android:id="@+id/app_music_btn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="musicBtn"
+            android:text=" Music "
+            android:textSize="30dp" 
+            style="@style/app_button"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/poll_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/music_grp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip" >
+
+ 
+
+        <Button
+            android:id="@+id/app_poll_btn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="pollBtn"
+            android:text=" Poll "
+            android:textSize="30dp"
+            style="@style/app_button"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/games_grp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/poll_grp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip" > <!-- replace text label with icon -->
+
+
+
+        <Button
+            android:id="@+id/app_games_btn"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="gamesBtn"
+            android:text=" Games "
+            android:textSize="30dp" 
+            style="@style/app_button"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
+</ScrollView>

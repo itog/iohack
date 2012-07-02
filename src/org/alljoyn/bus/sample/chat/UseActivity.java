@@ -21,16 +21,24 @@ import org.alljoyn.bus.sample.chat.Observable;
 import org.alljoyn.bus.sample.chat.Observer;
 import org.alljoyn.bus.sample.chat.DialogBuilder;
 
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.provider.ContactsContract;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentProviderOperation;
+import android.content.ContentValues;
 import android.content.Context;
+
+import android.content.DialogInterface;
+
+import android.content.Intent;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -69,31 +77,67 @@ public class UseActivity extends Activity implements Observer {
         hlv.setAdapter(mHistoryList);
         hlv.setOnItemClickListener(new OnItemClickListener() {
 
+			private String name;
+			private String email;
+			private String phone;
+
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int arg2,
 					long id) {
 				Log.i("my tag", "HERE");
 				TextView nameView = (TextView) v.findViewById(R.id.textName);
-				String name = nameView.getText().toString();
-				String email = mChatApplication.nameMap.get(name).get(0);
-				String phone = mChatApplication.nameMap.get(name).get(1);
+				name = nameView.getText().toString();
+				email = mChatApplication.nameMap.get(name).get(0);
+				phone = mChatApplication.nameMap.get(name).get(1);
 				Log.i("my tag", email);
 				Log.i("my tag", name);
 				Log.i("my tag", phone);
+				
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				        	Intent intent = new Intent(Intent.ACTION_INSERT);
+				        	intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+				        	intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+				        	intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
+				        	intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
+				        	int PICK_CONTACT = 100;
+				        	UseActivity.this.startActivityForResult(intent, PICK_CONTACT);
+				            break;
+
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            break;
+				        }
+				    }
+				};
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(UseActivity.this);
+				builder.setMessage("Add "+ name + " to contacts?").setPositiveButton("Yes", dialogClickListener)
+				    .setNegativeButton("No", dialogClickListener).show();
+				
 			}
 		});
                 
-//        mJoinButton = (Button)findViewById(R.id.useJoin);
-//        mJoinButton.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                showDialog(DIALOG_JOIN_ID);
-//        	}
-//        });
 
         mLeaveButton = (Button)findViewById(R.id.useLeave);
         mLeaveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showDialog(DIALOG_LEAVE_ID);
+            }
+        });
+        
+        
+        mAppsButton = (Button)findViewById(R.id.callActions);
+        mAppsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	/*
+            	Toast toast = Toast.makeText(getApplicationContext(), "Not implemented yet", Toast.LENGTH_SHORT);
+                toast.show();*/
+            	Intent appsIntent = new Intent(UseActivity.this,AppsActivity.class);
+            	UseActivity.this.startActivity(appsIntent);
+            	
             }
         });
         
@@ -275,6 +319,8 @@ public class UseActivity extends Activity implements Observer {
 	private ArrayAdapter<String> mHistoryList;
 
 	private Button mLeaveButton;
+	
+	private Button mAppsButton;
 
 	private TextView mChannelName;
 
