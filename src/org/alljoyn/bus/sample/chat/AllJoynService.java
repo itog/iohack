@@ -15,40 +15,30 @@
  */
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.TabWidget;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.ChatInterface;
-
 import org.alljoyn.bus.BusAttachment;
-import org.alljoyn.bus.BusListener;
-import org.alljoyn.bus.MessageContext;
-import org.alljoyn.bus.SessionListener;
-import org.alljoyn.bus.SessionPortListener;
-import org.alljoyn.bus.Mutable;
-import org.alljoyn.bus.SessionOpts;
 import org.alljoyn.bus.BusException;
+import org.alljoyn.bus.BusListener;
 import org.alljoyn.bus.BusObject;
+import org.alljoyn.bus.MessageContext;
+import org.alljoyn.bus.Mutable;
+import org.alljoyn.bus.SessionListener;
+import org.alljoyn.bus.SessionOpts;
+import org.alljoyn.bus.SessionPortListener;
 import org.alljoyn.bus.SignalEmitter;
 import org.alljoyn.bus.Status;
 import org.alljoyn.bus.annotation.BusSignalHandler;
-
-
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
-
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 @SuppressLint("NewApi")

@@ -19,7 +19,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.zip.GZIPInputStream;
@@ -28,42 +27,34 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
+import android.hardware.usb.UsbAccessory;
+import android.hardware.usb.UsbManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.future.usb.UsbAccessory;
-import com.android.future.usb.UsbManager;
 import com.google.android.apps.adk2.ADK;
-import com.google.android.apps.adk2.BTConnection;
 import com.google.android.apps.adk2.ConnectActivity;
 import com.google.android.apps.adk2.Connection;
 import com.google.android.apps.adk2.Preferences;
-//import com.google.android.apps.adk2.R;
 import com.google.android.apps.adk2.UsbConnection;
 import com.google.android.apps.adk2.Utilities;
-import org.alljoyn.bus.sample.chat.R;
 
 @SuppressLint({ "NewApi", "ParserError" })
 public class HomeActivity extends Activity implements OnClickListener,
@@ -169,7 +160,8 @@ public class HomeActivity extends Activity implements OnClickListener,
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		mPreferences.registerOnSharedPreferenceChangeListener(this);
 
-		mUSBManager = UsbManager.getInstance(this);
+		mUSBManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+				//UsbManager.getInstance(this);
 
 		mSoundFiles = new ArrayList<String>();
 

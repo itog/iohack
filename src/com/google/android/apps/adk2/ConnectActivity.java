@@ -18,7 +18,6 @@ package com.google.android.apps.adk2;
 import org.alljoyn.bus.sample.chat.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;

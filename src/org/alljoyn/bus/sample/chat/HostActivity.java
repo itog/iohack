@@ -16,24 +16,15 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.DialogBuilder;
-
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
-import android.app.Activity;
-import android.app.Dialog;
-
+import android.util.Log;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.TextView;
-
-import android.util.Log;
 
 public class HostActivity extends Activity implements Observer {
     private static final String TAG = "chat.HostActivity";

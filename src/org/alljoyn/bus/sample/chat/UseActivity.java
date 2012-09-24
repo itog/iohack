@@ -16,50 +16,30 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.ChatApplication;
-import org.alljoyn.bus.sample.chat.Observable;
-import org.alljoyn.bus.sample.chat.Observer;
-import org.alljoyn.bus.sample.chat.DialogBuilder;
-
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ContentProviderOperation;
-import android.content.ContentValues;
 import android.content.Context;
-
 import android.content.DialogInterface;
-
 import android.content.Intent;
-
-import android.view.KeyEvent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class UseActivity extends Activity implements Observer {
 	private static final String TAG = "chat.UseActivity";

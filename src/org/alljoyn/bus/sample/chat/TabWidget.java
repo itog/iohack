@@ -16,17 +16,12 @@
 
 package org.alljoyn.bus.sample.chat;
 
-import android.os.Bundle;
-
 import android.app.TabActivity;
-
-import android.widget.ListView;
-import android.widget.TabHost;
-
 import android.content.Intent;
 import android.content.res.Resources;
-
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.TabHost;
 
 public class TabWidget extends TabActivity {
     private static final String TAG = "chat.TabWidget";

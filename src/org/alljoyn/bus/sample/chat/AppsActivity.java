@@ -1,9 +1,7 @@
 package org.alljoyn.bus.sample.chat;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
 
 
 public class AppsActivity extends Activity {

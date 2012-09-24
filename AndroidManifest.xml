@@ -5,17 +5,12 @@
     android:versionName="1.0" >
 
     <!-- Permission required to use the TCP transport -->
-    <uses-permission android:name="android.permission.INTERNET" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_MULTICAST_STATE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MULTICAST_STATE" />
     <!-- Permission required to use the Bluetooth transport -->
-    <uses-permission android:name="android.permission.BLUETOOTH" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -29,6 +24,7 @@
     <uses-feature
         android:name="android.hardware.usb.accessory"
         android:required="true" />
+    <uses-sdk android:targetSdkVersion="16" android:minSdkVersion="12"/>
     
     <application
         android:name=".ChatApplication"

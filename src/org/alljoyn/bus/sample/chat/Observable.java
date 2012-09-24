@@ -15,7 +15,6 @@
  */
 package org.alljoyn.bus.sample.chat;
 
-import org.alljoyn.bus.sample.chat.Observer;
 
 public interface Observable {
 	public void addObserver(Observer obs);

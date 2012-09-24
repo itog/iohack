@@ -27,11 +27,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.usb.UsbAccessory;
+import android.hardware.usb.UsbManager;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
-
-import com.android.future.usb.UsbAccessory;
-import com.android.future.usb.UsbManager;
 
 public class UsbConnection extends Connection {
 	Activity mActivity;
@@ -47,7 +46,9 @@ public class UsbConnection extends Connection {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
-				UsbAccessory accessory = UsbManager.getAccessory(intent);
+				//UsbAccessory accessory = UsbManager.getAccessory(intent);
+				UsbAccessory accessory = (UsbAccessory)intent.getParcelableExtra(UsbManager.EXTRA_ACCESSORY);
+				//http://developer.android.com/guide/topics/connectivity/usb/accessory.html
 				if (accessory != null && accessory.equals(mAccessory)) {
 					Log.i(ADK.TAG, "closing accessory");
 					Intent connectIntent = new Intent(mActivity,
